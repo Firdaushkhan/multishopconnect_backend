@@ -9,21 +9,23 @@ const offerRoutes = require("./routes/offerRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 const app = express();
 
-/* 🔥 VERY IMPORTANT – CORS FIX */
+
+/* CORS */
 app.use(cors({
-  origin: "http://localhost:3000",
-  methods: ["GET", "POST", "PUT", "PATCH","DELETE","OPTIONS"],
+  origin: [
+    "http://localhost:3000",
+    "https://multishopconnect-frontend.onrender.com"
+  ],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-
 }));
 
 app.use(express.json());
 
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/migrate", require("./routes/migrateRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));

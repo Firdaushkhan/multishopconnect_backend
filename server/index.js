@@ -23,7 +23,10 @@ const adminRoutes = require("../routes/adminRoutes");
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: [
+    "http://localhost:3000",
+    "https://multishopconnect-frontend.onrender.com"
+  ],
   credentials: true,
 }));
 
@@ -53,9 +56,13 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
+  origin: [
+    "http://localhost:3000",
+    "https://multishopconnect-frontend.onrender.com"
+  ],
+  methods: ["GET", "POST"],
+  credentials: true,
+},
 });
 
 io.on("connection", (socket) => {
@@ -165,8 +172,10 @@ app.get("/", (req, res) => {
   res.send("Socket server running");
 });
 
-server.listen(5000, () => {
-  console.log("🚀 Backend running on http://localhost:5000");
+const PORT = process.env.PORT || 5000;
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Backend running on port ${PORT}`);
 });
 
 

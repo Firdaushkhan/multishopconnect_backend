@@ -41,10 +41,10 @@ const offerSchema = new mongoose.Schema({
     default: "pending"
   },
 
-  submittedAt: {
-    type: String,
-    default: () => new Date().toLocaleString()
-  }
+ submittedAt: {
+  type: Date,
+  default: Date.now
+}
 });
 
 module.exports = mongoose.model("Offer", offerSchema);

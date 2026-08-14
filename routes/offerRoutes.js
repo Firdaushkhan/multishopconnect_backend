@@ -32,8 +32,12 @@ router.post("/", async (req, res) => {
       deliveryTime: o.deliveryTime,
       remarks: o.remarks,
       image: o.image || "",
-      status: "pending"
+      status: "pending",
+       submittedAt: new Date()
     });
+
+  console.log("🔥 NEW OFFER CREATED AT:", new Date());
+console.log("🔥 SAVING submittedAt:", newOffer.submittedAt);
 
     const savedOffer = await newOffer.save();
 
